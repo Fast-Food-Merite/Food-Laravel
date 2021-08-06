@@ -16,17 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-Route::get('/greeting', function () {
-    return 'Hello World';
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
 });
 
 Route::prefix('food')->group(function () {
-    Route::get('/greeting', function () {
-        return 'Hello World';
-    });
     Route::get('/all', [foodController::class, 'All']);
     Route::get('/one/{id}', [foodController::class, 'One']);
     Route::post('/create', [foodController::class, 'Create']);
@@ -34,6 +28,5 @@ Route::prefix('food')->group(function () {
     Route::delete('/delete/{id}', [foodController::class, 'Delete']);
 });
 
-// Route::post('/users', [UserController::class, 'Create']);
 
 

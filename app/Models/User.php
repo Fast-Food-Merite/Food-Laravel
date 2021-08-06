@@ -14,7 +14,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 
-    
+
 
 
 
@@ -48,6 +48,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
 
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
 }
