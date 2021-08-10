@@ -24,8 +24,9 @@ class foodController extends Controller
     public function One($id)
     {
         // $response = DB::select('select * from food where id = ?',[$id]);
-        $response = DB::table('food')->where("id", '=', $id)->get();
-
+        // $response = DB::table('food')->where("id", '=', $id)->get();
+       $response = Food::find($id);
+       
         return $response;
     }
 

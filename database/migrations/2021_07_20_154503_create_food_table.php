@@ -13,6 +13,7 @@ class CreateFoodTable extends Migration
      */
     public function up()
     {
+        // Schema::disableForeignKeyConstraints();
         Schema::create('food', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,7 +21,10 @@ class CreateFoodTable extends Migration
             $table->string('price');
             $table->string('image');
             $table->string('animation');
-            $table->string('type');
+            // $table->foreignId('category_id')->constrained('categories');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreignId('restaurant_id')->constrained('restaurants');
             $table->timestamps();
         });
     }

@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Restaurant extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'type'
+        'name'
     ];
 
     public function food(){
