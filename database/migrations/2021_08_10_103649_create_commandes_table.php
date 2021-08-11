@@ -13,10 +13,11 @@ class CreateCommandesTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('role_id')->constrained('roles');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

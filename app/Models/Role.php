@@ -13,11 +13,7 @@ class Role extends Model
         'role'
     ];
 
-    public function contact(){
-        return $this->hasMany(Contact::class);
-    }
-
-    public function commande(){
-        return $this->hasMany(Commande::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

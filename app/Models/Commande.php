@@ -11,10 +11,10 @@ class Commande extends Model
 
     protected $fillable = [
         'name',
-        'role_id',
+        'user_id',
     ];
 
-    public function role(){
-        return $this->belongsTo(Role::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

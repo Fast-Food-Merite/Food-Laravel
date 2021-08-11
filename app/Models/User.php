@@ -41,6 +41,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function contact(){
+        return $this->hasOne(Contact::class);
+    }
 
+    public function commande(){
+        return $this->hasMany(Commande::class);
+    }
+
+    public function role(){
+        return $this->hasOne(Role::class);
+    }
     
 }

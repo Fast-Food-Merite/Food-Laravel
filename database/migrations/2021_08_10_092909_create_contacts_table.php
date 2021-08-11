@@ -14,16 +14,15 @@ class CreateContactsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('prenom');
-            $table->string('email')->unique();
-            $table->string('password');
             $table->string('tel')->require;
             $table->string('age');
             $table->string('adresse');
-            $table->foreignId('role_id')->constrained('roles');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

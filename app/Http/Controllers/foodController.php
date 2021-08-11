@@ -34,7 +34,7 @@ class foodController extends Controller
     public function Create(Request $req)
     {
 
-        if ($req->filled(['type', 'price', 'name', 'description', 'image', 'animation'])) {
+        if ($req->filled(['category_id', 'restaurant_id', 'price', 'name', 'description', 'image', 'animation'])) {
             try {
                 // $response = DB::table('food')->insert([
                 //     'type' => $req->type,
@@ -59,7 +59,8 @@ class foodController extends Controller
 
                 // create
                 $food = Food::create([
-                    'type' => $req->type,
+                    'category_id' => $req->category_id,
+                    'restaurant_id' => $req->restaurant_id,
                     'name' => $req->name,
                     'price' => $req->price,
                     'description' => $req->description,
@@ -95,7 +96,7 @@ class foodController extends Controller
     // update food
     public function Update(Request $req, $id)
     {
-        if ($req->filled(['type', 'price', 'name', 'description', 'image', 'animation'])) {
+        if ($req->filled(['category_id', "restaurant_id", 'price', 'name', 'description', 'image', 'animation'])) {
             try {
                 // $update = DB::table('food')
                 //     ->where('id', $id)
@@ -109,7 +110,8 @@ class foodController extends Controller
                 //     ]);
                 $food = Food::find($id);
 
-                $food->type = $req->type;
+                $food->category_id = $req->category_id;
+                $food->restaurant_id = $req->restaurant_id;
                 $food->name = $req->name;
                 $food->price = $req->price;
                 $food->description = $req->description;

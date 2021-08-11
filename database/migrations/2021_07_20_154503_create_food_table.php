@@ -13,18 +13,15 @@ class CreateFoodTable extends Migration
      */
     public function up()
     {
-        // Schema::disableForeignKeyConstraints();
         Schema::create('food', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('price');
+            $table->unsignedInteger('price');
             $table->string('image');
             $table->string('animation');
-            // $table->foreignId('category_id')->constrained('categories');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreignId('restaurant_id')->constrained('restaurants');
             $table->timestamps();
         });
     }

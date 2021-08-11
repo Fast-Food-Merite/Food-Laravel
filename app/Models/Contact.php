@@ -12,15 +12,13 @@ class Contact extends Model
     protected $fillable = [
         'name',
         'prenom',
-        'password',
-        'email',
         'adresse',
         'tel',
-        'age',
-        'role_id'
+        'age',  
+        'user_id' 
     ];
 
-    public function role(){
-        return $this->belongsTo(Role::class);
+    public function users(){
+        return $this->belongsTo(User::class);
     }
 }

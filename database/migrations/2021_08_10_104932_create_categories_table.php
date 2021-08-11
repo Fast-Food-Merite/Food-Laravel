@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateCategoriesTable extends Migration
@@ -25,8 +27,14 @@ class CreateCategoriesTable extends Migration
      *
      * @return void
      */
+    // public function down()
+    // {
+    //     Schema::dropIfExists('categories');
+    // }
     public function down()
     {
+        // Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('food');
         Schema::dropIfExists('categories');
     }
 }

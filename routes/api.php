@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\foodController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,5 +30,8 @@ Route::prefix('food')->group(function () {
     Route::delete('/delete/{id}', [foodController::class, 'Delete']);
 });
 
+Route::get('category/{id}', [CategoryController::class, 'search']);
+
+Route::get('restaurant/{id}', [RestaurantController::class, 'restaurant']);
 
 
