@@ -13,7 +13,6 @@ class Food extends Model
         'name',
         'price',
         'animation',
-        'type',
         'image',
         'description',
         'category_id',
@@ -21,9 +20,5 @@ class Food extends Model
 
     public function category(){
         return $this->belongsTo(Category::class);
-    }
-
-    public function restaurant(){
-        return $this->belongsTo(Restaurant::class);
     }
 }

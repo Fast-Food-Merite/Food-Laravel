@@ -30,7 +30,13 @@ Route::prefix('food')->group(function () {
     Route::delete('/delete/{id}', [foodController::class, 'Delete']);
 });
 
-Route::get('category/{id}', [CategoryController::class, 'search']);
+
+
+
+Route::prefix('category')->group( function(){
+    Route::get('all', [CategoryController::class, 'all']);
+    Route::get('one/{id}', [CategoryController::class, 'search']);
+});
 
 Route::get('restaurant/{id}', [RestaurantController::class, 'restaurant']);
 
