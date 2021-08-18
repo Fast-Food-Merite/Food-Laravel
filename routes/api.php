@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\foodController;
 use App\Http\Controllers\RestaurantController;
@@ -39,5 +40,9 @@ Route::prefix('category')->group( function(){
 });
 
 Route::get('restaurant/{id}', [RestaurantController::class, 'restaurant']);
+
+
+Route::post('auth/signin', [AuthController::class, 'signIn']);
+Route::post('auth/signup', [AuthController::class, 'signUp']);
 
 
