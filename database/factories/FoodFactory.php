@@ -25,7 +25,6 @@ class FoodFactory extends Factory
         return [
             'name' => $this->faker->word(),
             'price' => $price ,
-            'animation' => $this->faker->word(),
             'image' => $this->faker->word(),
             'description' => $this->faker->word(),
         ];

@@ -19,8 +19,7 @@ class CreateContactsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('prenom');
-            $table->unsignedInteger('tel');
-            $table->unsignedInteger('age');
+            $table->string('tel');
             $table->string('adresse');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommandesTable extends Migration
+class CreatePaiementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class CreateCommandesTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::create('commandes', function (Blueprint $table) {
+        Schema::create('paiements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('food_id')->constrained('food');
-            $table->unsignedInteger('price');
-            $table->Integer('number');
-            $table->boolean("validation");
-            $table->date('commandeDate');
+            $table->foreignId('commande_id')->constrained('commandes');
             $table->timestamps();
         });
     }
@@ -33,8 +28,6 @@ class CreateCommandesTable extends Migration
      */
     public function down()
     {
-        
-        Schema::dropIfExists('commandes');
-        
+        Schema::dropIfExists('paiements');
     }
 }

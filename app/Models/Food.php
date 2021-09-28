@@ -12,7 +12,6 @@ class Food extends Model
     protected $fillable = [
         'name',
         'price',
-        'animation',
         'image',
         'description',
         'category_id',
@@ -20,5 +19,9 @@ class Food extends Model
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+    public function commande(){
+        return $this->hasMany(Commande::class);
     }
 }

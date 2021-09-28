@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contact extends Model
+class Paiement extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name',
-        'prenom',
-        'adresse',
-        'tel',
-        'user_id' 
+        "user_id",
+        "commande_id",
     ];
 
-    public function users(){
+    public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function commande(){
+        return $this->belongsTo(Commande::class);
     }
 }

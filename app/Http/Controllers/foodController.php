@@ -15,9 +15,21 @@ class foodController extends Controller
 
         // $food = DB::table('food')->get();
 
-        $food = Food::all();
+        // $food = Food::all();
 
-        return $food;
+        $food = Food::with('category')->get(); 
+        if($food->count() < 1) {
+            return response([
+                'success' => false,
+                'message' => 'There are no food!'
+            ]);
+        }else {
+            return response([
+                'success' => true,
+                'data' => $food,
+                'message' => 'Succefully retreived all food!'
+            ]);
+        }
     }
 
     // get one food
@@ -25,7 +37,7 @@ class foodController extends Controller
     {
         // $response = DB::select('select * from food where id = ?',[$id]);
         // $response = DB::table('food')->where("id", '=', $id)->get();
-       $response = Food::find($id);
+        $response = Food::find($id);
        
         return $response;
     }
@@ -33,8 +45,7 @@ class foodController extends Controller
     // create food
     public function Create(Request $req)
     {
-
-        if ($req->filled(['category_id', 'restaurant_id', 'price', 'name', 'description', 'image', 'animation'])) {
+        if ($req->filled(['category_id', 'price', 'name', 'description', 'image',])) {
             try {
                 // $response = DB::table('food')->insert([
                 //     'type' => $req->type,
@@ -60,12 +71,10 @@ class foodController extends Controller
                 // create
                 $food = Food::create([
                     'category_id' => $req->category_id,
-                    'restaurant_id' => $req->restaurant_id,
                     'name' => $req->name,
                     'price' => $req->price,
                     'description' => $req->description,
                     'image' => $req->image,
-                    'animation' => $req->animation,
                 ]);
             } catch (Throwable $e) {
                 return [
@@ -96,7 +105,7 @@ class foodController extends Controller
     // update food
     public function Update(Request $req, $id)
     {
-        if ($req->filled(['category_id', "restaurant_id", 'price', 'name', 'description', 'image', 'animation'])) {
+        if ($req->filled(['price', 'name', 'description', 'image',])) {
             try {
                 // $update = DB::table('food')
                 //     ->where('id', $id)
@@ -110,13 +119,11 @@ class foodController extends Controller
                 //     ]);
                 $food = Food::find($id);
 
-                $food->category_id = $req->category_id;
-                $food->restaurant_id = $req->restaurant_id;
+                // $food->category_id = $req->category_id;
                 $food->name = $req->name;
                 $food->price = $req->price;
                 $food->description = $req->description;
                 $food->image = $req->image;
-                $food->animation = $req->animation;
 
                 $food->save();
             } catch (Throwable $e) {
@@ -170,5 +177,32 @@ class foodController extends Controller
                 'message' => "L'élément n'existe plus",
             ];
         }
+    }
+
+    // recuperer les pizza
+    public function pizza()
+    {
+        $pizza = Food::where('category_id', '1')->get();
+        return $pizza;
+    }
+
+    // recuperer des burger
+    public function burger()
+    {
+        $burger = Food::where('category_id', '2')->get();
+        return $burger;
+    }
+
+    // recuperer des cocktails
+    public function cocktail()
+    {
+        $cocktail = Food::where('category_id', '3')->get();
+        return $cocktail;
+    }
+
+    // speciality
+    public function speciality(){
+        $speciality = Food::where('category_id', '1')->take(3)->get();
+        return $speciality;
     }
 }
