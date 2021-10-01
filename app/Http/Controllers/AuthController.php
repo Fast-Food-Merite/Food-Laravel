@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderShipped;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class AuthController extends Controller
 {
@@ -22,6 +25,7 @@ class AuthController extends Controller
             return response([
                 "status" => "error",
                 "message" => "Cet utilisateur n'existe pas",
+                
             ], 404);
         } else if (!Hash::check($request->password, $user->password)) {
             return response([
@@ -35,6 +39,7 @@ class AuthController extends Controller
             "message" => "vous etes connecte",
             "token" => $user->createToken("token")->plainTextToken,
             "data" => $user,
+            'contact' =>  $user->contact,
             "ip" => $request->ip(),
         ], 202);
     }
@@ -48,6 +53,8 @@ class AuthController extends Controller
             "password" => bcrypt($req->password),
             "role_id" => "2",
         ]);
+
+        Mail::to($user)->send(new OrderShipped());
 
         if ($user) {
             return response([
@@ -128,4 +135,42 @@ class AuthController extends Controller
         }
 
     }
+
+     // update food
+     public function Update(Request $req, $id)
+     {
+         if ($req->filled(['username', 'email', 'password'])) {
+             try {
+                 
+                 $user = User::find($id);
+
+                 $user->name = $req->username;
+                 $user->email = $req->email;
+                 $user->password = bcrypt($req->password);
+
+                 $user->save();
+             } catch (Throwable $e) {
+                 return [
+                     "code" => "error",
+                     "message" => $e->getMessage(),
+                 ];
+             }
+             if ($user) {
+                 return [
+                     'code' => "succes",
+                     'message' => "ca marche",
+                 ];
+             } else {
+                 return [
+                     'code' => "default",
+                     'message' => "ca marche pas",
+                 ];
+             }
+         } else {
+             return [
+                 'code' => 'validation erronne',
+                 'message' => 'voir les donnees entrees',
+             ];
+         }
+     }
 }

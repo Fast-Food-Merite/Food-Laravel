@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commande;
+use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -48,37 +50,20 @@ class CommandeController extends Controller
 
     public function getOrder()
     {
-        // $commande = Commande::find(1);
-        // $commande = Commande::all();
 
-
-        // $commande->user;
-        // $commande->food;
-        // $commande = Commande::with('users')->get();
-
-        // foreach ($commande as $category) {
-        //     $category->user;
-        //     $category->food;
-        //     return response([
-        //         $category
-        //     ]);
-        // }
-        $commande = Commande::with('user','food')->get(); 
-        if($commande->count() < 1) {
+        $commande = Commande::with('user', 'food')->get();
+        if ($commande->count() < 1) {
             return response([
                 'success' => false,
                 'message' => 'There are no posts!'
             ]);
-        }else {
+        } else {
             return response([
                 'success' => true,
                 'data' => $commande,
                 'message' => 'Succefully retreived all posts!'
             ]);
         }
-        // return response([
-        //     $commande,
-        // ]);
     }
 
     public function delete($id)
@@ -109,20 +94,39 @@ class CommandeController extends Controller
 
     public function myOrder($id)
     {
-        $commande = Commande::find($id);
-        $order = $commande->food;
+        $commande = Commande::where('user_id', $id)->with('food')->get();
 
-        if ($order) {
+        if ($commande) {
             return response([
                 'status' => 'commandes presentes',
                 'message' => 'voici vos commandes',
-                'data' => $order
+                'data' => $commande
             ], 202);
         } else {
             return [
                 'status' => 'pas de commandes',
                 'message' => 'pas encore commander',
             ];
+        }
+    }
+
+    public function One($id)
+    {
+        $commande = Commande::where('id', $id)->with('food', 'user')->get();
+        if ($commande) {
+            $int = $commande[0]->user_id;
+            $contact = User::where('id', $int)->with('contact')->get();
+            return response([
+                'success' => true,
+                'data' => $commande,
+                'contact' => $contact,
+                'message' => 'Succefully retreived all posts!'
+            ]);
+        } else {
+            return response([
+                'success' => false,
+                'message' => 'There are no posts!'
+            ]);
         }
     }
 }

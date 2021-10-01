@@ -53,6 +53,7 @@ Route::prefix('auth')->group(function(){
     Route::post('admin', [AuthController::class, 'admin']);
     Route::get('one/{id}', [AuthController::class, 'one']);
     Route::delete('delete/{id}', [AuthController::class, 'delete']);
+    Route::put('/update/{id}', [AuthController::class, 'Update']);
 });
 
 // chefs
@@ -74,7 +75,10 @@ Route::prefix('commande')->group(function(){
     Route::post('order', [CommandeController::class, 'order']);
     Route::get('myOrder/{id}', [CommandeController::class, 'myOrder']);
     Route::delete('delete/{id}', [CommandeController::class, 'delete']);
+    Route::get('one/{id}', [CommandeController::class, 'one']);
 });
 
 Route::post('uploads', [UploadImgController::class, 'index']);
 Route::post('contact', [ContactController::class,'contact']);
+
+
