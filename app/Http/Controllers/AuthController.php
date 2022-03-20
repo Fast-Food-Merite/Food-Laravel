@@ -54,7 +54,7 @@ class AuthController extends Controller
             "role_id" => "2",
         ]);
 
-        Mail::to($user)->send(new OrderShipped());
+        // Mail::to($user)->send(new OrderShipped());
 
         if ($user) {
             return response([
