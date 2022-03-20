@@ -73,6 +73,7 @@ Route::prefix('reservation')->group(function(){
 Route::prefix('commande')->group(function(){
     Route::get('getOrder', [CommandeController::class, 'getOrder']);
     Route::post('order', [CommandeController::class, 'order']);
+    Route::post('validation/{id}', [CommandeController::class, 'validation']);
     Route::get('myOrder/{id}', [CommandeController::class, 'myOrder']);
     Route::delete('delete/{id}', [CommandeController::class, 'delete']);
     Route::get('one/{id}', [CommandeController::class, 'one']);

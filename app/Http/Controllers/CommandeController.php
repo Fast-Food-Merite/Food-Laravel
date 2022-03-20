@@ -129,4 +129,37 @@ class CommandeController extends Controller
             ]);
         }
     }
+
+    public function validation($id, Request $req){
+        if ($req->filled(['validation',])) {
+            try {
+                
+                $commande = Commande::find($id);
+                $commande->validation = $req->validation;
+
+                $commande->save();
+            } catch (Throwable $e) {
+                return [
+                    "code" => "error",
+                    "message" => $e->getMessage(),
+                ];
+            }
+            if ($commande) {
+                return [
+                    'code' => "succes",
+                    'message' => "commande validee",
+                ];
+            } else {
+                return [
+                    'code' => "default",
+                    'message' => "ca marche pas",
+                ];
+            }
+        } else {
+            return [
+                'code' => 'validation erronne',
+                'message' => 'voir les donnees entrees',
+            ];
+        }
+    }
 }
