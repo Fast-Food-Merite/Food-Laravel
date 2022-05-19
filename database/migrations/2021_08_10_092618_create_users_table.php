@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
@@ -22,9 +23,22 @@ class CreateUsersTable extends Migration
             $table->foreignId('role_id')->constrained('roles');
             $table->rememberToken();
             $table->timestamps();
-            
-            
         });
+
+        DB::table('users')->insert([
+            [
+                'name' => 'eric',
+                'email' => 'temsis@gmail.com',
+                'password' => 'password',
+                'role_id' => 1,
+            ],
+            [
+                'name' => 'victor',
+                'email' => 'victor@gmail.com',
+                'password' => 'password',
+                'role_id' => 2,
+            ],
+        ]);
     }
 
     /**

@@ -20,6 +20,18 @@ class CreateCategoriesTable extends Migration
             $table->string('type');
             $table->timestamps();
         });
+
+        DB::table('categories')->insert([
+            [
+                'type' => 'pizza',
+            ],
+            [
+                'type' => 'burger',
+            ],
+            [
+                'type' => 'cocktail',
+            ],
+        ]);
     }
 
     /**
