@@ -52,6 +52,7 @@ Route::prefix('auth')->group(function(){
     Route::post('signup', [AuthController::class, 'signUp']);
     Route::post('admin', [AuthController::class, 'admin']);
     Route::get('one/{id}', [AuthController::class, 'one']);
+    Route::get('all', [AuthController::class, 'all']);
     Route::delete('delete/{id}', [AuthController::class, 'delete']);
     Route::put('/update/{id}', [AuthController::class, 'Update']);
 });

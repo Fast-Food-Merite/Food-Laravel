@@ -30,7 +30,7 @@ class AuthController extends Controller
         } else if (!Hash::check($request->password, $user->password)) {
             return response([
                 "status" => "error",
-                "message" => "Votre mot de passe est incorrecte",
+                "message" => "Votre mot de passe est incorrect",
             ], 403);
         }
 
@@ -58,13 +58,13 @@ class AuthController extends Controller
 
         if ($user) {
             return response([
-                'status' => 'reussite',
+                'status' => 'réussite',
                 'message' => 'compte crée'
             ], 202);
         } else {
             return [
-                'status' => 'champ manquent ou email repetitif',
-                'message' => 'erronnee',
+                'status' => 'champ manquent ou email répétitif',
+                'message' => 'erronée',
             ];
         }
     }
@@ -133,7 +133,11 @@ class AuthController extends Controller
                 'message' => 'erronnee',
             ];
         }
+    }
 
+    public function all(){
+        $users = User::all();
+        return $users;
     }
 
      // update food

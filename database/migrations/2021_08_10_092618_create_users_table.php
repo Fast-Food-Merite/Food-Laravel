@@ -29,13 +29,13 @@ class CreateUsersTable extends Migration
             [
                 'name' => 'eric',
                 'email' => 'temsis@gmail.com',
-                'password' => 'password',
+                'password' => bcrypt('password'),
                 'role_id' => 1,
             ],
             [
                 'name' => 'victor',
                 'email' => 'victor@gmail.com',
-                'password' => 'password',
+                'password' => bcrypt('password'),
                 'role_id' => 2,
             ],
         ]);
