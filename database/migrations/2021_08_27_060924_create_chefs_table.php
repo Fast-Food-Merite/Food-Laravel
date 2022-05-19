@@ -30,12 +30,12 @@ class CreateChefsTable extends Migration
             ],
             [
                 'name' => 'Joanna',
-                'description' => 'Assistante',
+                'role' => 'Assistante',
                 'image' => 'https://www.shutterstock.com/fr/image-photo/smiling-african-american-woman-wearing-apron-1916346464',
             ],
             [
                 'name' => 'Jean',
-                'description' => 'Commis',
+                'role' => 'Commis',
                 'image' => 'https://www.shutterstock.com/fr/image-photo/cooking-profession-people-concept-happy-male-1426606880',
             ],
         ]);
